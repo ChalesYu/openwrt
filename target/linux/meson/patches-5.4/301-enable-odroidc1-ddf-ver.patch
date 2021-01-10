@@ -1,0 +1,92 @@
+This fix for DDF version ODROID-C1.
+Only for 5.4
+
+Signed-off-by: test <test@test.com>
+---
+ arch/arm/boot/dts/meson8b-odroidc1.dts
+ 
+--- a/arch/arm/boot/dts/meson8b-odroidc1.dts
++++ b/arch/arm/boot/dts/meson8b-odroidc1.dts
+@@ -9,7 +9,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ 
+ / {
+-	model = "Hardkernel ODROID-C1";
++	model = "Hardkernel ODROID-C1-DDF-Ver";
+ 	compatible = "hardkernel,odroid-c1", "amlogic,meson8b";
+ 
+ 	aliases {
+@@ -28,10 +28,20 @@
+ 
+ 	leds {
+ 		compatible = "gpio-leds";
++		red {
++			label = "c1:red:alive";
++			gpios = <&gpio_ao GPIOAO_2 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
++		green {
++			label = "c1:green:alive";
++			gpios = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
+ 		blue {
+ 			label = "c1:blue:alive";
+-			gpios = <&gpio_ao GPIOAO_13 GPIO_ACTIVE_LOW>;
+-			linux,default-trigger = "heartbeat";
++			gpios = <&gpio_ao GPIOAO_4 GPIO_ACTIVE_HIGH>;
++			//linux,default-trigger = "heartbeat";
+ 			default-state = "off";
+ 		};
+ 	};
+@@ -72,7 +82,7 @@
+ 		/*
+ 		 * signal name from schematics: TF_3V3N_1V8_EN
+ 		 */
+-		gpios = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
++		//gpios = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
+ 		gpios-states = <0>;
+ 
+ 		states = <3300000 0
+@@ -204,7 +214,7 @@
+ 
+ 	phy-mode = "rgmii";
+ 	phy-handle = <&eth_phy>;
+-	amlogic,tx-delay-ns = <4>;
++	amlogic,tx-delay-ns = <2>;
+ 
+ 	nvmem-cells = <&ethernet_mac_address>;
+ 	nvmem-cell-names = "mac-address";
+@@ -219,7 +229,7 @@
+ 			reg = <0>;
+ 
+ 			reset-assert-us = <10000>;
+-			reset-deassert-us = <30000>;
++			reset-deassert-us = <1000000>;
+ 			reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
+ 
+ 			interrupt-parent = <&gpio_intc>;
+@@ -290,7 +300,7 @@
+ 	 */
+ 	usb-hub {
+ 		gpio-hog;
+-		gpios = <GPIOAO_4 GPIO_ACTIVE_HIGH>;
++		//gpios = <GPIOAO_4 GPIO_ACTIVE_HIGH>;
+ 		output-high;
+ 		line-name = "usb-hub-reset";
+ 	};
+@@ -356,6 +366,14 @@
+ 	pinctrl-names = "default";
+ };
+ 
++&usb0_phy {
++	status = "okay";
++};
++
++&usb0 {
++	status = "okay";
++};
++
+ &usb1_phy {
+ 	status = "okay";
+ };
