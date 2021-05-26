@@ -1,0 +1,14 @@
+diff --git a/common/rtusb_dev_id.c b/common/rtusb_dev_id.c
+index 7e931b6..a764219 100755
+--- a/common/rtusb_dev_id.c
++++ b/common/rtusb_dev_id.c
+@@ -287,6 +287,7 @@ USB_DEVICE_ID rtusb_dev_id[] = {
+ 
+ #ifdef MT7603
+ 	{USB_DEVICE(0x0E8D,0x7603)},
++	{USB_DEVICE(0x0E8D,0x760C)},
+ #endif
+ #ifdef MT7636
+ 	{USB_DEVICE(0x0E8D,0x7606)},
+-- 
+
