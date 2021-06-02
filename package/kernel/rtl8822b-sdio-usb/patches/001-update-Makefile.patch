@@ -1,0 +1,15 @@
+diff --git a/Makefile b/Makefile
+index 60f290d..4ce976c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -23,7 +23,7 @@ ifeq ($(GCC_VER_49),1)
+ EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
+ endif
+ 
+-EXTRA_CFLAGS += -I$(src)/include
++EXTRA_CFLAGS += -I$(src)/include -I$(src)/hal -I$(src)/hal/phydm
+ 
+ EXTRA_LDFLAGS += --strip-debug
+ 
+-- 
+
